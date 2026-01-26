@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노인수 - Senior Backend Engineer Resume</title>
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+    <style>
+        :root {
+            /* [Color System] */
+            --color-primary-dark: #1e293b; /* Slate 800 */
+            --color-primary: #334155; /* Slate 700 */
+            --color-secondary: #475569; /* Slate 600 */
+            --color-accent: #2563eb; /* Royal Blue */
+            --color-accent-light: #eff6ff; /* Blue 50 */
+            --color-danger: #be123c; /* Rose 700 */
+            --color-danger-bg: #fff1f2; /* Rose 50 */
+            --color-warning-bg: #fff7ed; /* Orange 50 */
+            --color-warning-text: #c2410c; /* Orange 700 */
+
+            /* [Backgrounds] */
+            --bg-body: #64748b;
+            --bg-paper: #ffffff;
+            --bg-section: #f8fafc;
+
+            /* [Borders] */
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e1;
+
+            /* [Dimensions] */
+            --page-width: 210mm;
+            --page-padding: 16mm 20mm; /* 상하 여백 약간 줄임 */
+        }
+
+        /* [Reset & Typography] */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--color-primary-dark);
+            line-height: 1.55;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 0;
+            gap: 30px;
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+
+        p, li {
+            letter-spacing: -0.01em;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: var(--color-accent-light);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: var(--color-accent);
+            border: 1px solid #dbeafe;
+        }
+
+        /* [Page Layout] */
+        .page {
+            width: var(--page-width);
+            min-height: 297mm;
+            background: var(--bg-paper);
+            padding: var(--page-padding);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* [Header] */
+        header {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--color-primary-dark);
+        }
+
+        .header-left h1 {
+            font-size: 40px; /* 이름 키움 */
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            margin-bottom: 6px;
+            letter-spacing: -0.04em;
+        }
+
+        .header-left .eng-name {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--color-secondary);
+            margin-left: 6px;
+        }
+
+        .header-left .job-role {
+            font-size: 15px;
+            color: var(--color-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 13.5px;
+            color: var(--color-secondary);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .contact-info a {
+            color: var(--color-secondary);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--color-secondary);
+        }
+
+        /* [Section Titles] */
+        section {
+            margin-bottom: 26px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border-light);
+            margin-left: 12px;
+        }
+
+        /* [Summary Box] */
+        .summary-box {
+            background-color: var(--bg-section);
+            border-radius: 0 6px 6px 0;
+            padding: 18px 22px;
+            border-left: 4px solid var(--color-accent); /* 왼쪽 강조선 */
+        }
+
+        .summary-slogan {
+            font-size: 15.5px;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: 12px;
+            font-style: italic;
+            position: relative;
+        }
+
+        .summary-slogan::before {
+            content: "“";
+            font-size: 24px;
+            color: var(--color-accent);
+            position: absolute;
+            left: -18px;
+            top: -5px;
+        }
+
+        .summary-desc {
+            font-size: 14px;
+            color: var(--color-secondary);
+            margin-bottom: 12px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .summary-points li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 4px;
+            font-size: 13.5px;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .summary-points li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: var(--color-accent);
+            font-size: 11px;
+        }
+
+        /* [Skills] */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center; /* 수직 중앙 정렬 */
+        }
+
+        .skill-category {
+            width: 140px;
+            flex-shrink: 0;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+
+        /* Tech Tag Redesign: 조금 더 각지고 깔끔하게 */
+        .tech-tag {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px; /* Less rounded */
+            font-weight: 600;
+            letter-spacing: 0;
+        }
+
+        .tech-tag.main {
+            background-color: var(--color-primary-dark);
+            color: #ffffff;
+            border: 1px solid var(--color-primary-dark);
+        }
+
+        .tech-tag.sub {
+            background-color: #fff;
+            color: var(--color-secondary);
+            border: 1px solid var(--border-medium);
+        }
+
+        /* [Work Experience - Resume Page 1] */
+        .job-block {
+            margin-bottom: 22px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .job-company {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+        }
+
+        .job-period {
+            font-size: 13px;
+            color: var(--color-secondary);
+            font-weight: 600;
+            background: var(--bg-section);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .job-role-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .job-desc li {
+            position: relative;
+            padding-left: 14px;
+            margin-bottom: 4px;
+            font-size: 14px;
+            color: var(--color-secondary);
+        }
+
+        .job-desc li::before {
+            content: "•";
+            position: absolute;
+            left: 2px;
+            color: var(--border-medium);
+        }
+
+        .job-desc li strong {
+            color: var(--color-primary-dark);
+            font-weight: 700;
+        }
+
+        /* [Education] */
+        .edu-row {
+            display: flex;
+            margin-bottom: 6px;
+            font-size: 14px;
+            border-bottom: 1px dashed var(--border-light);
+            padding-bottom: 6px;
+        }
+
+        .edu-row:last-child {
+            border-bottom: none;
+        }
+
+        .edu-date {
+            width: 140px;
+            flex-shrink: 0;
+            color: var(--color-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* [Page 2: Career Description] */
+        .cd-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .cd-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .cd-subtitle {
+            font-size: 15px;
+            color: var(--color-secondary);
+            font-weight: 500;
+        }
+
+        /* [Project Detail] */
+        .project-block {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-left: 12px;
+            border-left: 5px solid var(--color-primary-dark); /* 강조색 변경 */
+        }
+
+        .project-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            line-height: 1.1;
+        }
+
+        .project-info-grid {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 6px 15px;
+            margin-bottom: 18px;
+            font-size: 13.5px;
+            padding: 12px 16px;
+            background: var(--bg-section);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: var(--color-secondary);
+            text-align: right;
+            text-transform: uppercase;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .tech-detail-box {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02); /* 미세한 그림자 */
+        }
+
+        .tech-topic {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        /* [Problem / Solution Badge System] */
+        .ps-row {
+            display: flex;
+            gap: 12px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+
+        .ps-badge {
+            min-width: 75px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 0;
+            border-radius: 4px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ps-badge.problem {
+            background: var(--bg-section);
+            color: var(--color-secondary);
+            border: 1px solid var(--border-medium);
+        }
+
+        .ps-badge.solution {
+            background: var(--color-accent-light);
+            color: var(--color-accent);
+            border: 1px solid #dbeafe;
+        }
+
+        .ps-badge.risk {
+            background: var(--color-danger-bg);
+            color: var(--color-danger);
+            border: 1px solid #ffe4e6;
+        }
+
+        .ps-badge.action {
+            background: #f0fdf4;
+            color: #15803d;
+            border: 1px solid #dcfce7;
+        }
+
+        /* Green */
+        .ps-badge.issue {
+            background: var(--color-warning-bg);
+            color: var(--color-warning-text);
+            border: 1px solid #ffedd5;
+        }
+
+        .ps-content {
+            color: var(--color-primary);
+            line-height: 1.6;
+        }
+
+        .ps-content strong {
+            color: var(--color-primary-dark);
+            font-weight: 700;
+            background: linear-gradient(to top, rgba(239, 246, 255, 0.8) 50%, transparent 50%); /* 형광펜 효과 수정 */
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                gap: 0;
+            }
+
+            .page {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border: none;
+                page-break-after: always;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+            /* 프린트 시 배경색 강제 적용 */
+            .ps-badge, .tech-tag, .summary-box, .project-info-grid, .job-period {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <header>
+        <div class="header-left">
+            <h1>노인수 <span class="eng-name">Andrew Noh</span></h1>
+            <div class="job-role">Senior Backend Engineer – High-Reliability Systems</div>
+        </div>
+        <div class="contact-info">
+            <div><a href="mailto:notho0@naver.com">notho0@naver.com</a></div>
+            <div>010-3955-5041</div>
+            <div style="margin-top:2px;">Seoul, South Korea</div>
+        </div>
+    </header>
+
+    <section>
+        <h2 class="section-title">Professional Summary</h2>
+        <div class="summary-box">
+            <div class="summary-slogan">
+                성공 케이스보다, 실패 케이스를 고려하여, 우리 시스템이 어떻게 버틸지부터 설계합니다.
+            </div>
+            <div class="summary-desc">
+                SRT 철도 예매 및 EV 충전 플랫폼에서 <strong>결제·정산 코어 시스템의 설계 및 구현을 주도했습니다.</strong>
+                '외부 시스템 장애는 필연적'이라는 전제하에 4단계 방어선(망취소-자동롤백-배치보정-수동개입)을 구축하여
+                외부의 실패가 내부 데이터 정합성 훼손으로 이어지지 않도록 방어했습니다.
+                절차적으로 얽힌 레거시 코드를 도메인 중심 구조로 재설계하여 복잡도를 낮추고,
+                장애가 발생해도 데이터가 틀어지지 않는 구조를 만드는 데 집중합니다.
+            </div>
+            <ul class="summary-points">
+                <li><strong>Data Integrity:</strong> 카드/포인트 복합 결제 1원 오차를 원천 차단하는 <strong>도메인 모델 설계</strong></li>
+                <li><strong>Operational Cost:</strong> 결제 오류 원인을 로그만으로 1분 내 규명 가능한 <strong>Audit Trail 체계화</strong></li>
+                <li><strong>Legacy Modernization:</strong> 블랙박스화된 외부 결제 모듈(C Lib)을 JNA로 직접 제어하여 <strong>장애 통제권
+                    확보</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-row">
+                <div class="skill-category">Architecture</div>
+                <div class="skill-list">
+                    <span class="tech-tag main">Payment Orchestration</span>
+                    <span class="tech-tag main">Fail-Safe Design</span>
+                    <span class="tech-tag sub">ISO 8583</span>
+                    <span class="tech-tag sub">Spring Batch</span>
+                </div>
+            </div>
+            <div class="skill-row">
+                <div class="skill-category">Backend & Data</div>
+                <div class="skill-list">
+                    <span class="tech-tag main">Java 17/21</span>
+                    <span class="tech-tag main">Spring Boot 3.x</span>
+                    <span class="tech-tag sub">Oracle / Tibero</span>
+                    <span class="tech-tag sub">Redis</span>
+                    <span class="tech-tag sub">JPA / QueryDSL</span>
+                </div>
+            </div>
+            <div class="skill-row">
+                <div class="skill-category">Protocol & Security</div>
+                <div class="skill-list">
+                    <span class="tech-tag main">Signal Protocol (E2EE)</span>
+                    <span class="tech-tag main">Netty</span>
+                    <span class="tech-tag sub">JNA (Java Native Access)</span>
+                    <span class="tech-tag sub">WebRTC</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Work Experience</h2>
+
+        <div class="job-block">
+            <div class="job-header">
+                <span class="job-company">VitzroSys (비츠로시스)</span>
+                <span class="job-period">2025.04 — 현재</span>
+            </div>
+            <span class="job-role-title">결제/정산 도메인 리드 (Core Module Design)</span>
+            <div class="job-desc">
+                <ul>
+                    <li><strong>SRT 통합 결제 플랫폼:</strong> 10개 이상의 VAN/PG사 연동 규격을 표준화한 <code>Payment Adapter Pattern</code>을
+                        설계하여 <strong>신규사 연동 기간을 2주에서 3일로 단축</strong>했습니다.
+                    </li>
+                    <li><strong>무결성 보장:</strong> 결제/취소 트랜잭션을 Command 객체로 캡슐화하여, <strong>실패 시 원자적(Atomic) 롤백</strong>을
+                        보장했습니다.
+                    </li>
+                    <li><strong>운영 효율화:</strong> 모호한 에러 메시지를 단계별 코드로 세분화하여, 운영팀의 장애 인지 및 전파 속도를 개선했습니다.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="job-block">
+            <div class="job-header">
+                <span class="job-company">Investy (인베스티)</span>
+                <span class="job-period">2022.10 — 2025.10</span>
+            </div>
+            <span class="job-role-title">백엔드 코어 개발 (Security & Legacy Migration)</span>
+            <div class="job-desc">
+                <ul>
+                    <li><strong>보안 관제 시스템:</strong> 네트워크 차단 환경을 우회하는 <strong>Signal Server를 독자 구축</strong>하여 클라우드 벤더
+                        락인(Vendor Lock-in)을 해소했습니다.
+                    </li>
+                    <li><strong>EV 충전 플랫폼:</strong> Maven/Legacy Spring을 <strong>Spring Boot 3.x로 마이그레이션</strong>하여 빌드 및
+                        배포 속도를 50% 단축했습니다.
+                    </li>
+                    <li><strong>비용 최적화:</strong> Google Maps API 의존성을 제거한 자체 위치 DB(Spatial Index) 구축으로 <strong>월 운영비
+                        1,000만 원을 절감</strong>했습니다.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section style="margin-bottom: 0;">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-row">
+            <span class="edu-date">2022.02 — 2022.09</span>
+            <div><strong>한국 소프트웨어 인재 개발원:</strong> Java 기반 웹 개발자 심화 과정 수료</div>
+        </div>
+        <div class="edu-row">
+            <span class="edu-date">2017.09 — 2017.12</span>
+            <div><strong>한국 소프트웨어 기술 진흥 협회:</strong> IoT 및 임베디드 시스템 과정 수료</div>
+        </div>
+    </section>
+</div>
+
+<div class="page">
+    <div class="cd-header">
+        <div class="cd-title">Career Description</div>
+        <div class="cd-subtitle">주요 프로젝트별 기술적 의사결정 및 트레이드오프 상세</div>
+    </div>
+
+    <div class="project-block">
+        <div class="project-top">
+            <div class="project-name">🚀 [SRT] 차세대 통합정보시스템 결제/정산 플랫폼</div>
+            <div class="job-period">2025.04 — 현재</div>
+        </div>
+        <div class="project-info-grid">
+            <div class="info-label">Role</div>
+            <div class="info-value">결제/정산 코어 전담 개발 (초기 설계부터 운영 이관까지)</div>
+            <div class="info-label">Tech Stack</div>
+            <div class="info-value">Java 17, Spring Boot 3, Oracle, Spring Batch</div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">1. 복합 결제 1원 오차 방어를 위한 금액 도메인 모델 설계</div>
+            <div class="ps-row">
+                <span class="ps-badge problem">Problem</span>
+                <div class="ps-content">
+                    카드/포인트 복합 결제 후 부분 취소 시, PG사와 내부 시스템 간 <strong>소수점 처리 방식 차이로 인한 정산 불일치</strong> 발생 리스크.
+                </div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge solution">Solution</span>
+                <div class="ps-content">
+                    서로 다른 금액 데이터를 일관된 구조로 다루기 위해 <strong>금액 표준화 모델</strong>을 설계했습니다.
+                    결제 수단별 잔액과 분배 책임을 가지는 <strong>Allocation 모델</strong>을 통해 사용 가능 금액을 자동 검증하고,
+                    필요한 금액을 순차적으로 이동시켜 자금 정합성을 확보했습니다.
+                </div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge risk">Fail-Fast</span>
+                <div class="ps-content">
+                    <strong>"마이너스 잔액은 절대 존재할 수 없다"</strong>는 불변식을 생성자에 강제하여,
+                    잘못된 계산 로직이 DB에 커밋되기 전 즉시 Exception을 발생시켜 <strong>데이터 오염을 원천 차단</strong>했습니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">2. 외부 연동 실패를 전제로 한 Fail-Safe 아키텍처</div>
+            <div class="ps-row">
+                <span class="ps-badge problem">Failure</span>
+                <div class="ps-content">
+                    PG사 승인은 성공했으나 내부 DB 저장 실패(Dual Write 문제) 시, <strong>고객 돈은 나가고 표는 없는</strong> 치명적 상황 발생.
+                </div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge solution">Solution</span>
+                <div class="ps-content">
+                    <strong>[요청 기록 → 승인 요청 → 응답 기록 → 확정]</strong> 4단계 상태 전이 로직을 구현했습니다.
+                    내부 저장 실패 시 즉시 <strong>망취소(Net-Cancel)</strong>를 수행하고, 망취소 실패 시 배치 재시도를 통해
+                    미확정 거래가 자동 복구되도록 다중 방어 체계를 설계했습니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">3. 레거시(ISO 8583) 통신 및 역분개 정산 시스템</div>
+            <div class="ps-row">
+                <span class="ps-badge action">Action</span>
+                <div class="ps-content">
+                    <strong>FEP(Front End Processor)</strong> 레벨의 TCP 소켓 모듈을 직접 구현하여 전문 파싱 로직을 내재화했습니다.
+                    취소 시 원거래 데이터를 삭제하지 않고, <strong>상쇄 데이터(-금액)를 적재하는 역분개 방식</strong>을 적용하여
+                    모든 자금 흐름을 사후 추적할 수 있도록 설계했습니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">4. 외부 연동 암호화 규격 불일치 해결</div>
+            <div class="ps-row">
+                <span class="ps-badge issue">Issue</span>
+                <div class="ps-content">페이코 연동 시 공식 문서(AES-128)와 실제 응답 패킷이 달라 복호화 실패.</div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge action">Action</span>
+                <div class="ps-content">
+                    로그 단위 비교 분석을 통해 문서에 명시되지 않은 <strong>고정 IV 값과 AES-256 사용</strong>을 역추적해냈습니다.
+                    이를 기반으로 공식 가이드 수정을 요청하고 연동을 정상화했습니다.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="project-block">
+        <div class="project-top">
+            <div class="project-name">🔒 국가기관 보안 메신저 및 관제 시스템</div>
+            <div class="job-period">2024.10 — 2025.03</div>
+        </div>
+        <div class="tech-detail-box">
+            <div class="tech-topic">1. Signal Server 독자 구축 (Cloud 종속성 제거)</div>
+            <div class="ps-row">
+                <span class="ps-badge problem">Constraint</span>
+                <div class="ps-content">
+                    외부 클라우드 불모지 및 망 분리 환경에서 <strong>Signal Protocol의 E2E 암호화</strong> 구현 필요.
+                </div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge solution">Solution</span>
+                <div class="ps-content">
+                    오픈소스 Signal Server의 AWS 종속성(DynamoDB, SQS)을 제거하고, <strong>Redis와 MySQL 조합으로 경량화 재구축</strong>했습니다.
+                    수천 개의 세션 키(PreKey) 관리 로직을 최적화하여 단일 서버에서도 안정적인 메시지 라우팅 처리가 가능하도록 구현했습니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">2. 네트워크 차단을 우회하는 터널링 아키텍처</div>
+            <div class="ps-row">
+                <span class="ps-badge problem">Problem</span>
+                <div class="ps-content">특정 국가의 <strong>DPI(Deep Packet Inspection)</strong> 시스템이 메신저 패킷 패턴을 탐지하여 차단.
+                </div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge solution">Solution</span>
+                <div class="ps-content">
+                    앱과 서버 간 통신을 네트워크 차단 환경에서도 유지하기 위한 <strong>커스텀 터널링 구조</strong>를 설계하여
+                    서버 IP를 은닉하고 트래픽을 난독화했습니다.
+                </div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge risk">Trade-off</span>
+                <div class="ps-content">
+                    터널링으로 인해 레이턴시가 <strong>평균 200ms 증가</strong>했으나, '전송 속도'보다 <strong>'연결 생존성'</strong>이 핵심 요구사항이었으므로 이를
+                    수용했습니다.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-block">
+        <div class="project-top">
+            <div class="project-name">⚡ 한화모티브 전기차 충전 플랫폼 리팩토링</div>
+            <div class="job-period">2023.12 — 2024.10</div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">1. Legacy Refactoring 및 의존성 격리</div>
+            <div class="ps-row">
+                <span class="ps-badge problem">Legacy</span>
+                <div class="ps-content">
+                    XML 설정 기반 Spring Legacy와 외부 업체 C 라이브러리가 혼재되어 수정 시 사이드 이펙트 예측 불가.
+                </div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge solution">Solution</span>
+                <div class="ps-content">
+                    <strong>Spring Boot 3.x</strong>로 전환하며 Java Config로 설정을 명시화했습니다.
+                    외부 라이브러리 호출부는 <strong>Interface로 추상화</strong>하여 격리하고, 실제 구현체는 JNA로 연결하여 비즈니스 로직과 기술 코드를 분리했습니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">2. JNA 기반 결제 모듈 내재화</div>
+            <div class="ps-row">
+                <span class="ps-badge issue">Issue</span>
+                <div class="ps-content">구형 리더기(EUC-KR)와 신형 서버(UTF-8) 간 <strong>인코딩 충돌</strong>로 결제 실패 빈번.</div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge action">Action</span>
+                <div class="ps-content">
+                    <strong>JNA(Java Native Access)</strong>를 통해 C 메모리 영역에 직접 접근하여 인코딩 변환 브릿지를 구현했습니다.
+                    블랙박스였던 결제 프로세스를 내재화함으로써 장애 대응 시간을 수 일에서 수 분 단위로 단축했습니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">3. WebClient 기반 비동기 추천 엔진</div>
+            <div class="ps-row">
+                <span class="ps-badge solution">Logic</span>
+                <div class="ps-content">
+                    [광고 > 추천 > 최저가 > 거리] 순의 <strong>Waterfall 추천 알고리즘</strong>을 적용했습니다.
+                    <strong>WebClient</strong>의 Non-blocking I/O를 활용하고, 타임아웃 발생 시 기본값(거리순)으로 Fallback 처리하여 장애 확산을
+                    방지했습니다.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-block">
+        <div class="project-top">
+            <div class="project-name">🌏 위치 기반 SNS 및 NFT 마켓플레이스 '1ECO'</div>
+            <div class="job-period">2023.02 — 2023.09</div>
+        </div>
+
+        <div class="tech-detail-box">
+            <div class="tech-topic">비용 절감을 위한 Geo-Spatial DB 자체 구축</div>
+            <div class="ps-row">
+                <span class="ps-badge problem">Cost</span>
+                <div class="ps-content">
+                    Google Maps API 호출 비용 과다로 서비스 확장에 걸림돌.
+                </div>
+            </div>
+            <div class="ps-row">
+                <span class="ps-badge action">Action</span>
+                <div class="ps-content">
+                    행정구역 폴리곤 데이터를 <strong>자체 DB(Spatial Index)</strong>에 구축하여 API 의존성을 제거, <strong>월 1,000만 원 비용
+                    절감</strong>을 달성했습니다.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
