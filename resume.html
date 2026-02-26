@@ -39,17 +39,17 @@
         <h2 class="section-title">Professional Summary</h2>
         <div class="summary-box">
             <div class="summary-slogan">
-                성공 케이스보다, 실패 케이스를 고려하여, 우리 시스템이 어떻게 버틸지부터 설계합니다.
+                성공 케이스보다, 실패 케이스를 고려하여, 시스템이 어떻게 버틸지부터 설계합니다.
             </div>
             <div class="summary-desc">
-                SRT 철도 예매 및 EV 충전 플랫폼에서 <strong>결제·정산 코어 시스템의 설계 및 구현을 주도했습니다.</strong>
-                '외부 시스템 장애는 필연적'이라는 전제하에 4단계 방어선(망취소-자동롤백-배치보정-수동개입)을 구축하여
+                SRT 철도 예매 및 EV 충전 플랫폼에서 <strong>결제 관련 코어 시스템의 설계 및 구현을 주도했습니다.</strong>
+                '외부 시스템 장애는 필연적'이라는 전제하에 4단계 방어선( ex)망취소-자동롤백-배치보정-수동개입 )을 구축하여
                 외부의 실패가 내부 데이터 정합성 훼손으로 이어지지 않도록 방어했습니다.
                 절차적으로 얽힌 레거시 코드를 도메인 중심 구조로 재설계하여 복잡도를 낮추고,
                 장애가 발생해도 데이터가 틀어지지 않는 구조를 만드는 데 집중합니다.
             </div>
             <ul class="summary-points">
-                <li><strong>Data Integrity:</strong> 카드/포인트 복합 결제 1원 오차를 원천 차단하는 <strong>도메인 모델 설계</strong></li>
+                <li><strong>Data Integrity:</strong> 다양한 조합의 복합 결제를 1원 오차조차 최대한 차단하는 <strong>도메인 모델 설계</strong></li>
                 <li><strong>Operational Cost:</strong> 결제 오류 원인을 로그만으로 1분 내 규명 가능한 <strong>Audit Trail 체계화</strong></li>
                 <li><strong>Legacy Modernization:</strong> 블랙박스화된 외부 결제 모듈(C Lib)을 JNA로 직접 제어하여 <strong>장애 통제권
                     확보</strong></li>
@@ -99,7 +99,7 @@
                 <span class="job-company">VitzroSys (비츠로시스)</span>
                 <span class="job-period">2025.04 — 현재</span>
             </div>
-            <span class="job-role-title">결제/정산 도메인 리드 (Core Module Design)</span>
+            <span class="job-role-title">결제 도메인 리드 (Core Module Design)</span>
             <div class="job-desc">
                 <ul>
                     <li><strong>SRT 통합 결제 플랫폼:</strong> 10개 이상의 VAN/PG사 연동 규격을 표준화한 <code>Payment Adapter Pattern</code>을
@@ -121,14 +121,14 @@
             <span class="job-role-title">백엔드 코어 개발 (Security & Legacy Migration)</span>
             <div class="job-desc">
                 <ul>
-                    <li><strong>보안 관제 시스템:</strong> 네트워크 차단 환경을 우회하는 <strong>Signal Server를 독자 구축</strong>하여 클라우드 벤더
+                    <li><strong>보안 관제 시스템:</strong> 네트워크 차단 환경을 우회하는 <strong>Server를 독자 구축</strong>하여 클라우드 벤더
                         락인(Vendor Lock-in)을 해소했습니다.
                     </li>
                     <li><strong>EV 충전 플랫폼:</strong> Maven/Legacy Spring을 <strong>Spring Boot 3.x로 마이그레이션</strong>하여 빌드 및
                         배포 속도를 50% 단축했습니다.
                     </li>
-                    <li><strong>비용 최적화:</strong> Google Maps API 의존성을 제거한 자체 위치 DB(Spatial Index) 구축으로 <strong>월 운영비
-                        1,000만 원을 절감</strong>했습니다.
+                    <li><strong>비용 최적화:</strong> Google Maps API 의존성을 제거한 자체 위치 DB(GADM 활용) 구축으로 <strong>월 운영비
+                        xxx만 원을 절감</strong>했습니다.
                     </li>
                 </ul>
             </div>
@@ -156,22 +156,22 @@
 
     <div class="project-block">
         <div class="project-top">
-            <div class="project-name">🚀 [SRT] 차세대 통합정보시스템 결제/정산 플랫폼</div>
+            <div class="project-name">🚀 [SR-MaaS] 통합정보시스템 구축 사업 - 결제 플랫폼</div>
             <div class="job-period">2025.04 — 현재</div>
         </div>
         <div class="project-info-grid">
             <div class="info-label">Role</div>
-            <div class="info-value">결제/정산 코어 전담 개발 (초기 설계부터 운영 이관까지)</div>
+            <div class="info-value">결제 코어 전담 개발 (초기 설계부터 운영 이관까지)</div>
             <div class="info-label">Tech Stack</div>
             <div class="info-value">Java 17, Spring Boot 3, Oracle, Spring Batch</div>
         </div>
 
         <div class="tech-detail-box">
-            <div class="tech-topic">1. 복합 결제 1원 오차 방어를 위한 금액 도메인 모델 설계</div>
+            <div class="tech-topic">1. 결제 1원 오차 방어를 위한 금액 도메인 모델 설계</div>
             <div class="ps-row">
                 <span class="ps-badge problem">Problem</span>
                 <div class="ps-content">
-                    카드/포인트 복합 결제 후 부분 취소 시, PG사와 내부 시스템 간 <strong>소수점 처리 방식 차이로 인한 정산 불일치</strong> 발생 리스크.
+                    복합 결제 후 부분 취소 및 다양한 <strong>금액 처리 서비스 분산으로 인한 정산 불일치</strong> 발생 리스크.
                 </div>
             </div>
             <div class="ps-row">
@@ -203,8 +203,8 @@
                 <span class="ps-badge solution">Solution</span>
                 <div class="ps-content">
                     <strong>[요청 기록 → 승인 요청 → 응답 기록 → 확정]</strong> 4단계 상태 전이 로직을 구현했습니다.
-                    내부 저장 실패 시 즉시 <strong>망취소(Net-Cancel)</strong>를 수행하고, 망취소 실패 시 배치 재시도를 통해
-                    미확정 거래가 자동 복구되도록 다중 방어 체계를 설계했습니다.
+                    내부 저장 실패 시 즉시 <strong>망취소(Net-Cancel)</strong>를 수행하고, 망취소 실패 시 배치 등록 후 재시도를 통해
+                    미확정 거래가 자동 취소되도록 다중 방어 체계를 설계했습니다.
                 </div>
             </div>
         </div>
@@ -362,6 +362,7 @@
 </div>
 </body>
 </html>
+
 
 
 
