@@ -39,20 +39,15 @@
         <h2 class="section-title">Professional Summary</h2>
         <div class="summary-box">
             <div class="summary-slogan">
-                성공 케이스보다, 실패 케이스를 고려하여, 시스템이 어떻게 버틸지부터 설계합니다.
+                성공 케이스보다, 실패 케이스를 전제로 시스템이 어떻게 버틸지부터 설계합니다.
             </div>
             <div class="summary-desc">
-                SRT 철도 예매 및 EV 충전 플랫폼에서 <strong>결제 관련 코어 시스템의 설계 및 구현을 주도했습니다.</strong>
-                '외부 시스템 장애는 필연적'이라는 전제하에 4단계 방어선( ex)망취소-자동롤백-배치보정-수동개입 )을 구축하여
-                외부의 실패가 내부 데이터 정합성 훼손으로 이어지지 않도록 방어했습니다.
-                절차적으로 얽힌 레거시 코드를 도메인 중심 구조로 재설계하여 복잡도를 낮추고,
-                장애가 발생해도 데이터가 틀어지지 않는 구조를 만드는 데 집중합니다.
+                비성수기 평일 기준 <strong>일평균 100만 건(승인 40만, 취소 10만, 예약/기타 50만)의 트랜잭션</strong>을 안정적으로 수용하기 위한 <strong>차세대 결제 플랫폼 아키텍처를 설계</strong>했습니다. 외부 시스템 장애를 필연적인 상수로 정의하고, 망취소-자동롤백-배치보정으로 이어지는 다중 방어선을 구축하여 데이터 정합성을 사수합니다. 단순히 짧은 코드보다 업무 흐름이 투명하게 읽히는 코드를 지향하며, 추상화의 비용과 실익을 냉철하게 따져 의사결정합니다.
             </div>
             <ul class="summary-points">
-                <li><strong>Data Integrity:</strong> 다양한 조합의 복합 결제를 1원 오차조차 최대한 차단하는 <strong>도메인 모델 설계</strong></li>
-                <li><strong>Operational Cost:</strong> 결제 오류 원인을 로그만으로 1분 내 규명 가능한 <strong>Audit Trail 체계화</strong></li>
-                <li><strong>Legacy Modernization:</strong> 블랙박스화된 외부 결제 모듈(C Lib)을 JNA로 직접 제어하여 <strong>장애 통제권
-                    확보</strong></li>
+                <li><strong>Scalability:</strong> 누적 <strong>2억 건(7개월 운영 규모) 데이터 환경</strong>에서 성능 저하 없는 쿼리 및 인덱스 최적화 검증</li>
+                <li><strong>Data Integrity:</strong> 1원 오차 및 마이너스 잔액 발생을 원천 차단하는 <strong>Fail-Fast 도메인 모델 설계</strong></li>
+                <li><strong>Modernization:</strong> 파편화된 VAN/PG 인터페이스를 <code>Adapter Pattern</code>으로 표준화하여 연동 생산성 극대화</li>
             </ul>
         </div>
     </section>
@@ -99,16 +94,12 @@
                 <span class="job-company">VitzroSys (비츠로시스)</span>
                 <span class="job-period">2025.04 — 현재</span>
             </div>
-            <span class="job-role-title">결제 도메인 리드 (Core Module Design)</span>
+            <span class="job-role-title">차세대 결제 플랫폼 설계 및 고도화 (Next-Gen Architecture Design)</span>
             <div class="job-desc">
                 <ul>
-                    <li><strong>SRT 통합 결제 플랫폼:</strong> 10개 이상의 VAN/PG사 연동 규격을 표준화한 <code>Payment Adapter Pattern</code>을
-                        설계하여 <strong>신규사 연동 기간을 2주에서 3일로 단축</strong>했습니다.
-                    </li>
-                    <li><strong>무결성 보장:</strong> 결제/취소 트랜잭션을 Command 객체로 캡슐화하여, <strong>실패 시 원자적(Atomic) 롤백</strong>을
-                        보장했습니다.
-                    </li>
-                    <li><strong>운영 효율화:</strong> 모호한 에러 메시지를 단계별 코드로 세분화하여, 운영팀의 장애 인지 및 전파 속도를 개선했습니다.</li>
+                    <li><strong>SRT 차세대 결제 플랫폼 설계:</strong> 평일 100만 건 규모의 트래픽 분석을 통한 고가용성 결제 엔진 및 정산 모듈 아키텍처링.</li>
+                    <li><strong>Interface Standardization:</strong> 10개 이상 VAN/PG사의 파편화된 규격을 어댑터 패턴으로 통합하여 <strong>신규 연동 기간을 3일 이내로 단축</strong>.</li>
+                    <li><strong>Performance Proof:</strong> 실 운영 7개월 치에 해당하는 <strong>2억 건 데이터 적재 테스트</strong>를 통해 장기 운영 성능 안정성 확보.</li>
                 </ul>
             </div>
         </div>
@@ -362,6 +353,7 @@
 </div>
 </body>
 </html>
+
 
 
 
