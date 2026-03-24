@@ -37,7 +37,7 @@ body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     background-color: var(--bg-body);
     color: var(--color-primary-dark);
-    line-height: 1.55;
+    line-height: 1.45;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,7 +71,7 @@ code {
 /* [Page Layout] */
 .page {
     width: var(--page-width);
-    min-height: 297mm;
+    height: auto;
     background: var(--bg-paper);
     padding: var(--page-padding);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
@@ -83,16 +83,16 @@ code {
 
 /* [Header] */
 header {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
     border-bottom: 2px solid var(--color-primary-dark);
 }
 
 .header-left h1 {
-    font-size: 40px; /* 이름 키움 */
+    font-size: 34px;
     font-weight: 800;
     color: var(--color-primary-dark);
     margin-bottom: 6px;
@@ -100,7 +100,7 @@ header {
 }
 
 .header-left .eng-name {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--color-secondary);
     margin-left: 6px;
@@ -116,7 +116,7 @@ header {
 
 .contact-info {
     text-align: right;
-    font-size: 13.5px;
+    font-size: 13px;;
     color: var(--color-secondary);
     font-weight: 500;
     line-height: 1.5;
@@ -130,7 +130,7 @@ header {
 
 /* [Section Titles] */
 section {
-    margin-bottom: 26px;
+    margin-bottom: 20px;
 }
 
 .section-title {
@@ -179,10 +179,10 @@ section {
 }
 
 .summary-desc {
-    font-size: 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
     color: var(--color-secondary);
     margin-bottom: 12px;
-    line-height: 1.6;
     text-align: justify;
 }
 
@@ -256,7 +256,7 @@ section {
 
 /* [Work Experience - Resume Page 1] */
 .job-block {
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 }
 
 .job-header {
@@ -332,16 +332,18 @@ section {
 /* [Page 2: Career Description] */
 .cd-header {
     text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
     border-bottom: 2px solid var(--border-light);
+
+    page-break-after: avoid;
+    break-after: avoid;
 }
 
 .cd-title {
     font-size: 26px;
     font-weight: 800;
     color: var(--color-primary-dark);
-    margin-bottom: 6px;
 }
 
 .cd-subtitle {
@@ -352,7 +354,7 @@ section {
 
 /* [Project Detail] */
 .project-block {
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     page-break-inside: avoid;
 }
 
@@ -416,20 +418,20 @@ section {
     display: flex;
     gap: 12px;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     align-items: flex-start;
 }
 
 .ps-badge {
-    min-width: 75px;
+    min-width: 70px;
     text-align: center;
     font-size: 11px;
     font-weight: 800;
-    padding: 3px 0;
+    padding: 2px 0;
     border-radius: 4px;
     text-transform: uppercase;
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: 1px;
 }
 
 .ps-badge.problem {
@@ -463,8 +465,9 @@ section {
 }
 
 .ps-content {
+    font-size: 13.5px;
     color: var(--color-primary);
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .ps-content strong {
@@ -476,34 +479,22 @@ section {
 @media print {
     @page {
         size: A4;
-        margin: 0; /* 브라우저가 만드는 상단 날짜, 하단 URL 등 헤더/푸터 제거 */
+        margin: 0;
     }
 
     body {
         background: none;
         padding: 0;
         margin: 0;
-        gap: 0;
     }
 
     .page {
-        width: 210mm; /* 100% 대신 수치 고정 */
-        height: 297mm; /* A4 높이 고정 */
+        height: auto;
         margin: 0;
-        padding: var(--page-padding); /* 위에서 설정한 20mm 15mm 유지 */
+        padding: var(--page-padding);
         box-shadow: none;
         border: none;
         page-break-after: always;
-    }
-
-    .page:last-child {
-        page-break-after: auto;
-    }
-
-    /* 프린트 시 배경색 및 태그 색상 강제 유지 */
-    .ps-badge, .tech-tag, .summary-box, .project-info-grid, .job-period {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 }
 
