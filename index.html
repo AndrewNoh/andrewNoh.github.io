@@ -324,49 +324,40 @@ body_class: home-page
     <div class="note-list">
         <article class="note-item">
             <h3 class="note-item__title">
-                ISO 8583 전문 처리
+                ISO 8583 전문과 TCP 통신 처리
             </h3>
 
             <p class="note-item__description">
-                FEP 통신을 위한 TCP 소켓 모듈과 ISO 8583 전문 파싱을 구현하고,
-                취소 거래는 원거래 삭제가 아닌 역분개 방식으로 기록하여
-                거래 추적성을 유지했습니다.
+                FEP와 직접 통신하기 위한 TCP 소켓 모듈을 구현하고,
+                ISO 8583 전문의 필드 조립·파싱과 응답 코드 처리를 담당했습니다.
+                취소 거래는 원거래를 삭제하지 않고 별도의 역거래로 기록해
+                승인부터 취소까지의 거래 이력을 추적할 수 있도록 구성했습니다.
             </p>
         </article>
 
         <article class="note-item">
             <h3 class="note-item__title">
-                네이티브 결제 모듈 의존성 격리
+                기존 C 결제 라이브러리 연동
             </h3>
 
             <p class="note-item__description">
-                기존 C 결제 라이브러리를 JNA로 연동하고,
-                네이티브 함수 호출과 문자 인코딩 책임을
-                애플리케이션 결제 인터페이스 뒤로 격리했습니다.
+                기존 C 기반 결제 라이브러리를 JNA로 연동하고,
+                메모리 구조와 문자열 인코딩 차이를 Java 경계에서 변환했습니다.
+                네이티브 함수와 포인터 처리 세부사항이
+                상위 결제 서비스로 노출되지 않도록 어댑터로 분리했습니다.
             </p>
         </article>
 
         <article class="note-item">
             <h3 class="note-item__title">
-                제한 네트워크 환경의 메시징
+                폐쇄망 메시징 인프라 구성
             </h3>
 
             <p class="note-item__description">
-                외부 클라우드 사용이 제한된 환경에서
-                오픈소스 메시징 서버의 의존성을 분석하고,
-                Redis와 MySQL 기반의 독립 운영 구조를 구성했습니다.
-            </p>
-        </article>
-
-        <article class="note-item">
-            <h3 class="note-item__title">
-                대규모 데이터 성능 검증
-            </h3>
-
-            <p class="note-item__description">
-                장기 운영 시점의 데이터 분포를 고려해
-                대규모 테스트 데이터를 구성하고,
-                Oracle 쿼리와 인덱스의 성능 저하 여부를 검증했습니다.
+                외부 클라우드와 관리형 서비스 사용이 제한된 환경에서
+                오픈소스 메시징 서버의 실행 의존성과 저장 구조를 분석했습니다.
+                내부 Redis와 MySQL만으로 설치·운영할 수 있는 구성을 마련하고,
+                네트워크와 인프라 담당자에게 필요한 설정을 정리했습니다.
             </p>
         </article>
     </div>
