@@ -15,7 +15,7 @@
 ## 🧩 Resume
 
 👉 이력서 웹 버전  
-**https://andrewnoh.github.io/resume.html**
+**https://andrewnoh.github.io**
 
 (※ PDF 버전은 추후 업데이트 예정)
 
