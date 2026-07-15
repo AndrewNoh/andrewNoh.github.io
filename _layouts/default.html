@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% assign page_title = page.title | default: site.title %}
+    {% assign page_description = page.description | default: site.description %}
+    {% assign page_image = page.image | default: site.default_image %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% if page.title %}
+        {{ page.title }} | {{ site.title }}
+        {% else %}
+        {{ site.title }}
+        {% endif %}
+    </title>
+
+    <meta name="description" content="{{ page_description | strip_html | strip_newlines | escape }}">
+    <meta name="author" content="{{ site.author | default: '노인수' }}">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:title" content="{{ page_title | escape }}">
+    <meta property="og:description" content="{{ page_description | strip_html | strip_newlines | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+
+    {% if page_image %}
+    <meta property="og:image" content="{{ page_image | absolute_url }}">
+    {% endif %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="{% if page_image %}summary_large_image{% else %}summary{% endif %}">
+    <meta name="twitter:title" content="{{ page_title | escape }}">
+    <meta name="twitter:description" content="{{ page_description | strip_html | strip_newlines | escape }}">
+
+    {% if page_image %}
+    <meta name="twitter:image" content="{{ page_image | absolute_url }}">
+    {% endif %}
+
+    <!-- Font -->
+    <link
+            rel="stylesheet"
+            as="style"
+            crossorigin
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+    >
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    {% if page.extra_css %}
+    {% for stylesheet in page.extra_css %}
+    <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
+    {% endfor %}
+    {% endif %}
+</head>
+
+<body class="{{ page.body_class | default: 'portfolio-page' }}">
+<a class="skip-link" href="#main-content">
+    본문으로 바로가기
+</a>
+
+{% include header.html %}
+
+<main id="main-content" class="site-main">
+    {{ content }}
+</main>
+
+{% include footer.html %}
+
+{% if page.extra_js %}
+{% for script in page.extra_js %}
+<script src="{{ script | relative_url }}" defer></script>
+{% endfor %}
+{% endif %}
+</body>
+</html>
