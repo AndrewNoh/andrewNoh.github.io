@@ -36,9 +36,8 @@ body_class: case-study-page
       <span>Fee Allocation</span>
       <span>Fail Fast</span>
     </div>
-  </header>
-
-  <section class="case-study-summary" aria-labelledby="summary-title" markdown="1">
+  </header>  
+<section class="case-study-summary" aria-labelledby="summary-title" markdown="1">
 
 ## 한눈에 보기 {#summary-title}
 
@@ -69,7 +68,7 @@ body_class: case-study-page
 </div>
 </section>
 
-  <section class="case-study-section" aria-labelledby="background-title" markdown="1">
+<section class="case-study-section" aria-labelledby="background-title" markdown="1">
 
 ## 1. 배경 {#background-title}
 
@@ -109,7 +108,7 @@ body_class: case-study-page
 업무상 발생한 수수료도 함께 연결되어야 했습니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="case-title" markdown="1">
+<section class="case-study-section" aria-labelledby="case-title" markdown="1">
 
 ## 2. 거래 유형에 따라 달라지는 입력정보 {#case-title}
 
@@ -148,8 +147,7 @@ body_class: case-study-page
 더 많은 금액을 해당 수단에서 반환할 수는 없습니다.
 
 ```text
-결제수단별 누적 반환금액
-≤ 결제수단별 승인금액
+결제수단별 누적 반환금액 ≤ 결제수단별 승인금액
 ```
 
 ### 여정변경
@@ -173,7 +171,7 @@ body_class: case-study-page
 금액 관계를 추적하기 어려워질 수 있었습니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="problem-title" markdown="1">
+<section class="case-study-section" aria-labelledby="problem-title" markdown="1">
 
 ## 3. 핵심 문제 {#problem-title}
 
@@ -250,7 +248,7 @@ body_class: case-study-page
 ```
 </section>
 
-  <section class="case-study-section" aria-labelledby="risk-title" markdown="1">
+<section class="case-study-section" aria-labelledby="risk-title" markdown="1">
 
 ## 4. 거래 유형별 계산 로직을 분리할 때의 위험 {#risk-title}
 
@@ -281,7 +279,7 @@ body_class: case-study-page
 동일한 분배 엔진을 사용하도록 구성했습니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="goal-title" markdown="1">
+<section class="case-study-section" aria-labelledby="goal-title" markdown="1">
 
 ## 5. 설계 목표 {#goal-title}
 
@@ -316,40 +314,38 @@ body_class: case-study-page
 합계 불일치, 음수 금액은 DB 저장 이전에 예외로 처리합니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="architecture-title" markdown="1">
+<section class="case-study-section" aria-labelledby="architecture-title" markdown="1">
 
 ## 6. 전체 구조 {#architecture-title}
 ```text
 거래 요청
-│
-▼
+    │
+    ▼
 거래 유형 판별
 DB 조회를 통해 승인 / 반환 / 여정변경 확인
-│
-▼
+    │
+    ▼
 AllocationContextAssembler
-│
-├── 수납정보 조회
-├── 현재 요청정보 변환
-├── 기존 결제정보 조회
-├── 기존 승인 분배결과 조회
-└── 반환 및 수수료내역 조회
-│
-▼
+    ├── 수납정보 조회
+    ├── 현재 요청정보 변환
+    ├── 기존 결제정보 조회
+    ├── 기존 승인 분배결과 조회
+    └── 반환 및 수수료내역 조회
+    │
+    ▼
 AllocationContext
 공통 금액 모델
-│
-▼
+    │
+    ▼
 AmountAllocator.allocate()
-│
-├── 결제수단 우선순위 정렬
-├── 승인 또는 반환 가능금액 계산
-├── 결제금액 분배
-├── 공급가액·부가세·면세금액 분배
-├── 수수료 분배
-└── 전체 불변식 검증
-│
-▼
+    ├── 결제수단 우선순위 정렬
+    ├── 승인 또는 반환 가능금액 계산
+    ├── 결제금액 분배
+    ├── 공급가액·부가세·면세금액 분배
+    ├── 수수료 분배
+    └── 전체 불변식 검증
+    │
+    ▼
 PaymentAmountMapping
 ```
 
@@ -360,7 +356,7 @@ PaymentAmountMapping
 어떤 정보를 조회하고 공통 모델에 넣느냐입니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="context-title" markdown="1">
+<section class="case-study-section" aria-labelledby="context-title" markdown="1">
 
 ## 7. 공통 금액 모델 {#context-title}
 
@@ -369,49 +365,49 @@ PaymentAmountMapping
 
 ```java
 public record AllocationContext(
-TransactionType transactionType,
-ReceiptAmount receipt,
-List<RequestedPayment> requestedPayments,
-List<ApprovedPayment> approvedPayments,
-  List<PreviousReturn> previousReturns,
+    TransactionType transactionType,
+    ReceiptAmount receipt,
+    List<RequestedPayment> requestedPayments,
+    List<ApprovedPayment> approvedPayments,
+    List<PreviousReturn> previousReturns,
     FeeAmount fee
     ) {
 
     public record ReceiptAmount(
-    BigDecimal totalAmount,
-    BigDecimal taxableSupplyAmount,
-    BigDecimal vatAmount,
-    BigDecimal taxFreeAmount
-    ) {
+        BigDecimal totalAmount,
+        BigDecimal taxableSupplyAmount,
+        BigDecimal vatAmount,
+        BigDecimal taxFreeAmount
+        ) {
     }
 
     public record RequestedPayment(
-    PaymentMethod method,
-    BigDecimal amount,
-    int priority
-    ) {
+        PaymentMethod method,
+        BigDecimal amount,
+        int priority
+        ) {
     }
 
     public record ApprovedPayment(
-    PaymentMethod method,
-    BigDecimal approvedAmount,
-    BigDecimal taxableSupplyAmount,
-    BigDecimal vatAmount,
-    BigDecimal taxFreeAmount
-    ) {
+        PaymentMethod method,
+        BigDecimal approvedAmount,
+        BigDecimal taxableSupplyAmount,
+        BigDecimal vatAmount,
+        BigDecimal taxFreeAmount
+        ) {
     }
 
     public record PreviousReturn(
-    PaymentMethod method,
-    BigDecimal returnedAmount
-    ) {
+        PaymentMethod method,
+        BigDecimal returnedAmount
+        ) {
     }
 
     public record FeeAmount(
-    BigDecimal totalAmount
-    ) {
+        BigDecimal totalAmount
+        ) {
     }
-    }
+}
 ```
 
     실제 거래 유형에 따라 일부 정보는 비어 있을 수 있습니다.
@@ -439,7 +435,7 @@ List<ApprovedPayment> approvedPayments,
     정규화된 `AllocationContext`만 사용합니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="assembler-title" markdown="1">
+<section class="case-study-section" aria-labelledby="assembler-title" markdown="1">
 
 ## 8. 거래 유형에 맞는 정보 조립 {#assembler-title}
 
@@ -450,23 +446,23 @@ DB 조회 결과를 기준으로 거래 유형을 판단합니다.
 @Component
 public class AllocationContextAssembler {
 
-public AllocationContext assemble(
-PaymentRequest request
-) {
-TransactionType transactionType =
-transactionTypeResolver.resolve(request);
+    public AllocationContext assemble(
+        PaymentRequest request
+        ) {
+        TransactionType transactionType =
+            transactionTypeResolver.resolve(request);
 
-return switch (transactionType) {
-case APPROVAL ->
-assembleApproval(request);
+        return switch (transactionType) {
+        case APPROVAL ->
+            assembleApproval(request);
 
-case RETURN ->
-assembleReturn(request);
+        case RETURN ->
+            assembleReturn(request);
 
-case JOURNEY_CHANGE ->
-assembleJourneyChange(request);
-};
-}
+        case JOURNEY_CHANGE ->
+            assembleJourneyChange(request);
+        };
+    }
 }
 ```
 
@@ -474,19 +470,19 @@ assembleJourneyChange(request);
 
 ```java
 private AllocationContext assembleApproval(
-PaymentRequest request
-) {
-ReceiptAmount receipt =
-receiptRepository.getRequired(request.receiptId());
+    PaymentRequest request
+    ) {
+    ReceiptAmount receipt =
+        receiptRepository.getRequired(request.receiptId());
 
-List<RequestedPayment> requestedPayments =
-requestedPaymentConverter.convert(request);
+    List<RequestedPayment> requestedPayments =
+        requestedPaymentConverter.convert(request);
 
-return AllocationContext.forApproval(
-receipt,
-requestedPayments,
-resolveFee(request)
-);
+    return AllocationContext.forApproval(
+        receipt,
+        requestedPayments,
+        resolveFee(request)
+        );
 }
 ```
 
@@ -494,32 +490,32 @@ resolveFee(request)
 
 ```java
 private AllocationContext assembleReturn(
-PaymentRequest request
-) {
-ReceiptAmount receipt =
-receiptRepository.getRequired(request.receiptId());
+    PaymentRequest request
+    ) {
+    ReceiptAmount receipt =
+        receiptRepository.getRequired(request.receiptId());
 
-List<ApprovedPayment> approvedPayments =
-  paymentRepository.findApprovedPayments(
-  request.originalTransactionId()
-  );
+    List<ApprovedPayment> approvedPayments =
+        paymentRepository.findApprovedPayments(
+        request.originalTransactionId()
+        );
 
-  List<PreviousReturn> previousReturns =
-    returnRepository.findPreviousReturns(
-    request.originalTransactionId()
-    );
+    List<PreviousReturn> previousReturns =
+        returnRepository.findPreviousReturns(
+        request.originalTransactionId()
+        );
 
     List<RequestedPayment> requestedPayments =
-      requestedPaymentConverter.convert(request);
+        requestedPaymentConverter.convert(request);
 
-      return AllocationContext.forReturn(
-      receipt,
-      requestedPayments,
-      approvedPayments,
-      previousReturns,
-      resolveFee(request)
-      );
-      }
+    return AllocationContext.forReturn(
+        receipt,
+        requestedPayments,
+        approvedPayments,
+        previousReturns,
+        resolveFee(request)
+        );
+}
 ```
 
       반환에서는 기존 승인정보와 기존 반환내역을 함께 조회합니다.
@@ -533,7 +529,7 @@ List<ApprovedPayment> approvedPayments =
 ```
 </section>
 
-  <section class="case-study-section" aria-labelledby="journey-title" markdown="1">
+<section class="case-study-section" aria-labelledby="journey-title" markdown="1">
 
 ## 9. 여정변경 처리 {#journey-title}
 
@@ -542,17 +538,15 @@ List<ApprovedPayment> approvedPayments =
 
 ```text
 기존 승차권
-│
-└── 반환 대상 계산
-│
-▼
+    └── 반환 대상 계산
+        │
+        ▼
 기존 승인 분배결과 기준 반환금액 분배
 
 변경된 승차권
-│
-└── 신규 수납 및 결제 요청
-│
-▼
+    └── 신규 수납 및 결제 요청
+        │
+        ▼
 신규 승인금액 분배
 ```
 
@@ -572,32 +566,30 @@ List<ApprovedPayment> approvedPayments =
 
 ```java
 public JourneyChangeAllocation allocateJourneyChange(
-JourneyChangeRequest request
-) {
-AllocationContext returnContext =
-contextAssembler.assembleReturnPart(request);
+    JourneyChangeRequest request) {
+    AllocationContext returnContext =
+        contextAssembler.assembleReturnPart(request);
 
-AllocationContext approvalContext =
-contextAssembler.assembleApprovalPart(request);
+    AllocationContext approvalContext =
+        contextAssembler.assembleApprovalPart(request);
 
-List<PaymentAmountMapping> returnMappings =
-amountAllocator.allocate(returnContext);
+    List<PaymentAmountMapping> returnMappings =
+        amountAllocator.allocate(returnContext);
 
-List<PaymentAmountMapping> approvalMappings =
-  amountAllocator.allocate(approvalContext);
+    List<PaymentAmountMapping> approvalMappings =
+        amountAllocator.allocate(approvalContext);
 
-  return new JourneyChangeAllocation(
-  returnMappings,
-  approvalMappings
-  );
-  }
+    return new JourneyChangeAllocation(
+        returnMappings,
+        approvalMappings
+        );
+}
 ```
 
 계산 메서드를 거래별로 새로 구현하지 않고,
 입력 컨텍스트만 반환용과 승인용으로 조립합니다.
-</section>
 
-  <section class="case-study-section" aria-labelledby="priority-title" markdown="1">
+  </section>  <section class="case-study-section" aria-labelledby="priority-title" markdown="1">
 
 ## 10. 약 14개 결제수단의 우선순위 {#priority-title}
 
@@ -609,25 +601,24 @@ List<PaymentAmountMapping> approvalMappings =
 
 ```java
 public record RequestedPayment(
-PaymentMethod method,
-BigDecimal amount,
-int allocationPriority
-) {
+    PaymentMethod method,
+    BigDecimal amount,
+    int allocationPriority) {
 }
 ```
 
 ```java
 private List<RequestedPayment> sortByPriority(
-List<RequestedPayment> requestedPayments
-  ) {
-  return requestedPayments.stream()
-  .sorted(
-  Comparator.comparingInt(
-  RequestedPayment::allocationPriority
-  )
-  )
-  .toList();
-  }
+    List<RequestedPayment> requestedPayments
+    ) {
+    return requestedPayments.stream()
+        .sorted(
+        Comparator.comparingInt(
+        RequestedPayment::allocationPriority
+        )
+        )
+        .toList();
+}
 ```
 
 우선순위를 원본 요청의 배열 순서나
@@ -637,7 +628,7 @@ List<RequestedPayment> requestedPayments
 동일한 업무 규칙으로 분배할 수 있습니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="allocator-title" markdown="1">
+<section class="case-study-section" aria-labelledby="allocator-title" markdown="1">
 
 ## 11. 하나의 분배 메서드 {#allocator-title}
 
@@ -646,48 +637,45 @@ List<RequestedPayment> requestedPayments
 
 ```java
 public List<PaymentAmountMapping> allocate(
-AllocationContext context
-) {
-List<AllocationTarget> targets =
-  targetFactory.create(context);
+    AllocationContext context
+    ) {
+    List<AllocationTarget> targets =
+        targetFactory.create(context);
 
-  List<AllocationTarget> orderedTargets =
-    sortByPriority(targets);
+    List<AllocationTarget> orderedTargets =
+        sortByPriority(targets);
 
     AllocationState state =
-    AllocationState.from(context);
+        AllocationState.from(context);
 
     List<PaymentAmountMapping> mappings =
-      new ArrayList<>();
+        new ArrayList<>();
 
-      for (AllocationTarget target : orderedTargets) {
-      if (state.isCompleted()) {
-      break;
-      }
+    for (AllocationTarget target : orderedTargets) {
+        if (state.isCompleted()) {
+            break;
+        }
 
-      AllocatedAmount allocated =
-      state.allocateTo(target);
+        AllocatedAmount allocated =
+            state.allocateTo(target);
 
-      if (allocated.isZero()) {
-      continue;
-      }
+        if (allocated.isZero()) {
+            continue;
+        }
 
-      mappings.add(
-      PaymentAmountMapping.of(
-      target.paymentMethod(),
-      allocated
-      )
-      );
-      }
+        mappings.add(
+            PaymentAmountMapping.of(
+            target.paymentMethod(),
+            allocated));
+    }
 
-      allocationValidator.validate(
-      context,
-      state,
-      mappings
-      );
+    allocationValidator.validate(
+        context,
+        state,
+        mappings);
 
-      return List.copyOf(mappings);
-      }
+    return List.copyOf(mappings);
+}
 ```
 
       거래 유형에 따른 차이는 `targetFactory`가 처리합니다.
@@ -709,7 +697,7 @@ List<AllocationTarget> targets =
       별도의 계산식으로 분기하지 않습니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="return-title" markdown="1">
+<section class="case-study-section" aria-labelledby="return-title" markdown="1">
 
 ## 12. 기존 승인금액을 초과하지 않는 반환 {#return-title}
 
@@ -733,22 +721,22 @@ List<AllocationTarget> targets =
 
 ```java
 public BigDecimal returnableAmount(
-ApprovedPayment approved,
-BigDecimal previouslyReturnedAmount
-) {
-BigDecimal returnable =
-approved.approvedAmount()
-.subtract(previouslyReturnedAmount);
+    ApprovedPayment approved,
+    BigDecimal previouslyReturnedAmount
+    ) {
+    BigDecimal returnable =
+        approved.approvedAmount()
+        .subtract(previouslyReturnedAmount);
 
-if (returnable.signum() < 0) {
-throw new InvalidReturnStateException(
-approved.method(),
-approved.approvedAmount(),
-previouslyReturnedAmount
-);
-}
+    if (returnable.signum() < 0) {
+        throw new InvalidReturnStateException(
+            approved.method(),
+            approved.approvedAmount(),
+            previouslyReturnedAmount
+            );
+    }
 
-return returnable;
+    return returnable;
 }
 ```
 
@@ -764,7 +752,7 @@ return returnable;
 ```
 </section>
 
-  <section class="case-study-section" aria-labelledby="tax-title" markdown="1">
+<section class="case-study-section" aria-labelledby="tax-title" markdown="1">
 
 ## 13. 공급가액·부가세·면세금액 분배 {#tax-title}
 
@@ -804,7 +792,7 @@ return returnable;
 승인 당시 계산과 다른 기준을 사용하는 것을 방지했습니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="fee-title" markdown="1">
+<section class="case-study-section" aria-labelledby="fee-title" markdown="1">
 
 ## 14. 수수료 분배 {#fee-title}
 
@@ -824,13 +812,13 @@ return returnable;
 
 ```java
 public record FeeAmount(
-BigDecimal totalAmount
-) {
-public FeeAmount {
-if (totalAmount == null || totalAmount.signum() < 0) {
-throw new InvalidFeeAmountException(totalAmount);
-}
-}
+    BigDecimal totalAmount
+    ) {
+    public FeeAmount {
+        if (totalAmount == null || totalAmount.signum() < 0) {
+            throw new InvalidFeeAmountException(totalAmount);
+        }
+    }
 }
 ```
 
@@ -839,13 +827,13 @@ throw new InvalidFeeAmountException(totalAmount);
 
 ```java
 public record PaymentAmountMapping(
-PaymentMethod paymentMethod,
-BigDecimal paymentAmount,
-BigDecimal taxableSupplyAmount,
-BigDecimal vatAmount,
-BigDecimal taxFreeAmount,
-BigDecimal feeAmount
-) {
+    PaymentMethod paymentMethod,
+    BigDecimal paymentAmount,
+    BigDecimal taxableSupplyAmount,
+    BigDecimal vatAmount,
+    BigDecimal taxFreeAmount,
+    BigDecimal feeAmount
+    ) {
 }
 ```
 
@@ -858,7 +846,7 @@ BigDecimal feeAmount
 ```
 </section>
 
-  <section class="case-study-section" aria-labelledby="state-title" markdown="1">
+<section class="case-study-section" aria-labelledby="state-title" markdown="1">
 
 ## 15. 분배 상태 관리 {#state-title}
 
@@ -877,29 +865,29 @@ BigDecimal feeAmount
 ```java
 public final class AllocationState {
 
-private BigDecimal remainingPaymentAmount;
-private BigDecimal remainingSupplyAmount;
-private BigDecimal remainingVatAmount;
-private BigDecimal remainingTaxFreeAmount;
-private BigDecimal remainingFeeAmount;
+    private BigDecimal remainingPaymentAmount;
+    private BigDecimal remainingSupplyAmount;
+    private BigDecimal remainingVatAmount;
+    private BigDecimal remainingTaxFreeAmount;
+    private BigDecimal remainingFeeAmount;
 
-public AllocatedAmount allocateTo(
-AllocationTarget target
-) {
-BigDecimal paymentAmount =
-calculatePaymentAmount(target);
+    public AllocatedAmount allocateTo(
+        AllocationTarget target
+        ) {
+        BigDecimal paymentAmount =
+            calculatePaymentAmount(target);
 
-AllocatedAmount allocated =
-calculateComponents(
-target,
-paymentAmount
-);
+        AllocatedAmount allocated =
+            calculateComponents(
+            target,
+            paymentAmount
+            );
 
-subtract(allocated);
-validateNonNegative();
+        subtract(allocated);
+        validateNonNegative();
 
-return allocated;
-}
+        return allocated;
+    }
 }
 ```
 
@@ -907,7 +895,7 @@ return allocated;
 중간 계산에서 발생한 오류를 즉시 차단했습니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="validation-title" markdown="1">
+<section class="case-study-section" aria-labelledby="validation-title" markdown="1">
 
 ## 16. 저장 전 금액 불변식 검증 {#validation-title}
 
@@ -964,20 +952,19 @@ return allocated;
 
 ```java
 public void validate(
-AllocationContext context,
-AllocationState state,
-List<PaymentAmountMapping> mappings
-) {
-validatePaymentTotal(context, mappings);
-validateTaxComponents(mappings);
-validateApprovedLimits(context, mappings);
-validateFeeTotal(context, mappings);
-state.validateCompleted();
+    AllocationContext context,
+    AllocationState state,
+    List<PaymentAmountMapping> mappings) {
+    validatePaymentTotal(context, mappings);
+    validateTaxComponents(mappings);
+    validateApprovedLimits(context, mappings);
+    validateFeeTotal(context, mappings);
+    state.validateCompleted();
 }
 ```
 </section>
 
-  <section class="case-study-section" aria-labelledby="result-title" markdown="1">
+<section class="case-study-section" aria-labelledby="result-title" markdown="1">
 
 ## 17. 이 구조로 얻은 효과 {#result-title}
 
@@ -1013,7 +1000,7 @@ DB 조회와 요청정보 변환은 조립기가 담당하고,
 기존 분배 엔진을 재사용할 수 있습니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="tradeoff-title" markdown="1">
+<section class="case-study-section" aria-labelledby="tradeoff-title" markdown="1">
 
 ## 18. 트레이드오프 {#tradeoff-title}
 
@@ -1050,7 +1037,7 @@ DB 조회와 요청정보 변환은 조립기가 담당하고,
 정합성의 기준으로 사용해야 합니다.
 </section>
 
-  <section class="case-study-section" aria-labelledby="retrospective-title" markdown="1">
+<section class="case-study-section" aria-labelledby="retrospective-title" markdown="1">
 
 ## 19. 회고 {#retrospective-title}
 
