@@ -1,0 +1,24 @@
+title: 노인수 | Backend Engineering Portfolio
+description: 결제 시스템의 확장 구조, 실패 복구, 금액 정합성과 외부 연동 문제를 해결해 온 백엔드 엔지니어 노인수의 기술 포트폴리오입니다.
+
+author: 노인수
+
+url: "https://andrewnoh.github.io"
+baseurl: ""
+
+lang: ko-KR
+timezone: Asia/Seoul
+
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
