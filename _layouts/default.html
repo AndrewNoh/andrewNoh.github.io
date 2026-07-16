@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLLL626KJW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-QLLL626KJW');
+    </script>
+
     {% assign page_title = page.title | default: site.title %}
     {% assign page_description = page.description | default: site.description %}
     {% assign page_image = page.image | default: site.default_image %}
