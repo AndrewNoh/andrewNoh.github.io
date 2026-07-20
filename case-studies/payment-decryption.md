@@ -531,7 +531,7 @@ public interface ApprovalPayloadDecryptor {
 
 ```java
 @Component
-public class PaycoApprovalPayloadDecryptor
+public class paymentApprovalPayloadDecryptor
 implements ApprovalPayloadDecryptor {
 
     private final PrivateKeyProvider privateKeyProvider;
@@ -826,7 +826,7 @@ CBC 블록의 특성을 이용해 다음 가설을 세웠고,
 이 경험을 통해 외부 연동에서 중요한 것은
 문서를 그대로 구현하는 것만이 아니라,
 
-- 문서와 실제 데이터가 일치하는지 검증하고
+- 문서와 실제 데이터가 일치하는지 검증하고`
 - 실패 조건을 재현 가능한 테스트로 만들며
 - 가능성을 독립된 가설로 분리하고
 - 결과를 외부 조직이 확인할 수 있는 형태로 설명하는 것
