@@ -29,7 +29,10 @@
         {% endif %}
     </title>
 
-    <meta name="description" content="{{ page_description | strip_html | strip_newlines | escape }}">
+    <meta
+            name="description"
+            content="{{ page_description | strip_html | strip_newlines | escape }}"
+    >
     <meta name="author" content="{{ site.author | default: '노인수' }}">
     <meta name="theme-color" content="#ffffff">
 
@@ -40,7 +43,10 @@
     <meta property="og:locale" content="ko_KR">
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:title" content="{{ page_title | escape }}">
-    <meta property="og:description" content="{{ page_description | strip_html | strip_newlines | escape }}">
+    <meta
+            property="og:description"
+            content="{{ page_description | strip_html | strip_newlines | escape }}"
+    >
     <meta property="og:url" content="{{ page.url | absolute_url }}">
 
     {% if page_image %}
@@ -48,9 +54,15 @@
     {% endif %}
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="{% if page_image %}summary_large_image{% else %}summary{% endif %}">
+    <meta
+            name="twitter:card"
+            content="{% if page_image %}summary_large_image{% else %}summary{% endif %}"
+    >
     <meta name="twitter:title" content="{{ page_title | escape }}">
-    <meta name="twitter:description" content="{{ page_description | strip_html | strip_newlines | escape }}">
+    <meta
+            name="twitter:description"
+            content="{{ page_description | strip_html | strip_newlines | escape }}"
+    >
 
     {% if page_image %}
     <meta name="twitter:image" content="{{ page_image | absolute_url }}">
@@ -65,16 +77,23 @@
     >
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link
+            rel="stylesheet"
+            href="{{ '/assets/css/style.css' | relative_url }}"
+    >
 
     {% if page.extra_css %}
     {% for stylesheet in page.extra_css %}
-    <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
+    <link
+            rel="stylesheet"
+            href="{{ stylesheet | relative_url }}"
+    >
     {% endfor %}
     {% endif %}
 </head>
 
-<body class="{{ page.body_class | default: 'portfolio-page' }}">
+<body id="top" class="{{ page.body_class | default: 'portfolio-page' }}">
+
 <a class="skip-link" href="#main-content">
     본문으로 바로가기
 </a>
@@ -85,6 +104,57 @@
     {{ content }}
 </main>
 
+{% if page.body_class == "case-study-page" %}
+<section
+        class="case-study-navigation"
+        aria-label="케이스 스터디 이동"
+>
+    <div class="case-study-navigation__inner">
+        <p class="case-study-navigation__message">
+            끝까지 읽어주셔서 감사합니다.
+        </p>
+
+        <div class="case-study-navigation__actions">
+            <a
+                    class="button button--secondary case-study-navigation__home"
+                    href="{{ '/' | relative_url }}#case-studies"
+                    onclick="gtag('event', 'case_study_list_click', {
+                        page_title: '{{ page.title | escape }}'
+                    });"
+            >
+                <span aria-hidden="true">←</span>
+                포트폴리오 메인으로
+            </a>
+
+            <a
+                    class="button button--secondary case-study-navigation__top"
+                    href="#top"
+                    onclick="gtag('event', 'back_to_top_click', {
+                        button_location: 'case_study_bottom',
+                        page_title: '{{ page.title | escape }}'
+                    });"
+            >
+                맨 위로
+                <span aria-hidden="true">↑</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<a
+        class="back-to-top"
+        href="#top"
+        aria-label="페이지 맨 위로 이동"
+        title="맨 위로"
+        onclick="gtag('event', 'back_to_top_click', {
+            button_location: 'floating_button',
+            page_title: '{{ page.title | escape }}'
+        });"
+>
+    <span aria-hidden="true">↑</span>
+</a>
+{% endif %}
+
 {% include footer.html %}
 
 {% if page.extra_js %}
@@ -92,5 +162,78 @@
 <script src="{{ script | relative_url }}" defer></script>
 {% endfor %}
 {% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const backToTopButton = document.querySelector('.back-to-top');
+        const bottomTopButton = document.querySelector(
+            '.case-study-navigation__top'
+        );
+
+        let isTicking = false;
+
+        function scrollToTop(event) {
+            event.preventDefault();
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function updateBackToTopButton() {
+            if (!backToTopButton) {
+                isTicking = false;
+                return;
+            }
+
+            const shouldShow = window.scrollY > 500;
+
+            backToTopButton.classList.toggle(
+                'is-visible',
+                shouldShow
+            );
+
+            isTicking = false;
+        }
+
+        function handleScroll() {
+            if (isTicking) {
+                return;
+            }
+
+            isTicking = true;
+
+            window.requestAnimationFrame(
+                updateBackToTopButton
+            );
+        }
+
+        if (backToTopButton) {
+            updateBackToTopButton();
+
+            window.addEventListener(
+                'scroll',
+                handleScroll,
+                {
+                    passive: true
+                }
+            );
+
+            backToTopButton.addEventListener(
+                'click',
+                scrollToTop
+            );
+        }
+
+        if (bottomTopButton) {
+            bottomTopButton.addEventListener(
+                'click',
+                scrollToTop
+            );
+        }
+    });
+</script>
+
 </body>
 </html>
